@@ -82,13 +82,12 @@ def stage_all_download(file_list,folder_id_name_map):
             download_folder(folder,folderPath)
 
 def download_folder(folder,folderPath):
-    # fileIDlist = []
-    # for fileInfo in folder["files"]:
-    #     fileIDlist.append(fileInfo["id"])
-    # print(fileIDlist)
-    with Pool(processes=2*mp.cpu_count()) as pool:
-        # pool.starmap(download_file, zip(fileIDlist, itertools.repeat(folderPath)))
-        pool.starmap(download_file, zip(folder['files'], itertools.repeat(folderPath)))
+    ## with multiprocessing
+    # with Pool(processes=2*mp.cpu_count()) as pool:
+    #     pool.starmap(download_file, zip(folder['files'], itertools.repeat(folderPath)))
+    ## without multiprocessing
+    for fileInfo in folder['files']:
+        download_file(fileInfo,folderPath)
 
 
 def main():
